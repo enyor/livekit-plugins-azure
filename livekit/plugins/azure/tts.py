@@ -247,8 +247,9 @@ class ChunkedStream(tts.ChunkedStream):
 
                 prosody_ssml += ">"
                 ssml += prosody_ssml
+                ssml += f'<lang xml:lang="{self._opts.language or "en-US"}">'
                 ssml += self._input_text
-                ssml += "</prosody></voice></speak>"
+                ssml += "</lang></prosody></voice></speak>"
                 return synthesizer.speak_ssml_async(ssml).get()  # type: ignore
 
             return synthesizer.speak_text_async(self.input_text).get()  # type: ignore
